@@ -1,0 +1,170 @@
+--  @실습문제
+
+--1. 2020년 12월 25일이 무슨 요일인지 조회하시오.
+--
+select to_char(to_date('2020/12/25'), 'yyyy/mm/dd (dy)') 
+from dual;
+
+--
+--2. 주민번호가 70년대 생이면서 성별이 여자이고, 성이 전씨인 직원들의 
+--사원명, 주민번호, 부서명, 직급명을 조회하시오.
+select E.emp_name 사원명,
+          E.emp_no 주민번호,
+          d.dept_title 부서명,
+          j.job_name 직급명
+from employee E join department D
+    on E.dept_code = D.dept_id 
+    join job J
+    on E.job_code = J.job_code
+    where emp_name like '전%' and substr(emp_no,1,2) >=70 
+    and substr(emp_no,1,2)<80 and decode(substr(emp_no,8,1),'2','여') = '여';
+
+select *from employee;
+select *from department; --부서명
+select * from job; -- 직급
+
+
+--3. 가장 나이가 적은 직원의 사번, 사원명, 나이, 부서명, 직급명을 조회하시오.
+select E.emp_id 사번,
+            E.emp_name 사원명,
+          extract (year from sysdate) - 
+          (decode(substr(e.emp_no,8,1),'1',1900,'2',1900,2000) 
+           + substr(e.emp_no,1,2)) + 1 나이,
+          d.dept_title 부서명,
+          j.job_name 직급명
+from employee E  left join department D
+    on E.dept_code = D.dept_id 
+    join job J
+    on E.job_code = J.job_code
+   where (extract (year from sysdate) - 
+          (decode(substr(e.emp_no,8,1),'1',1900,'2',1900,2000) 
+           + substr(e.emp_no,1,2)) + 1) =  (select min(extract (year from sysdate) - 
+          (decode(substr(e.emp_no,8,1),'1',1900,'2',1900,2000) 
+           + substr(e.emp_no,1,2)) + 1) from employee E);
+--
+--
+--4. 이름에 '형'자가 들어가는 직원들의 사번, 사원명, 부서명을 조회하시오.
+select E.emp_id 사번,
+            E.emp_name 사원명,
+          d.dept_title 부서명
+from employee E join department D
+    on E.dept_code = D.dept_id 
+    where e.emp_name like'%형%';
+
+--5. 해외영업팀에 근무하는 사원명, 직급명, 부서코드, 부서명을 조회하시오.
+select E.emp_name 사원명,
+          j.job_name 직급명,
+          d.dept_id 부서코드,
+           d.dept_title 부서명
+from employee E left join department D
+    on E.dept_code = D.dept_id 
+    left join job J
+    on E.job_code = J.job_code
+    where d.dept_title like '해외%';
+    
+    select *from employee;
+select *from department; --부서명
+select * from job; -- 직급
+--
+--6. 보너스포인트를 받는 직원들의 사원명, 보너스포인트, 부서명, 근무지역명을 조회하시오.
+select e.emp_name 사원명, 
+           e.bonus 보너스포인트,
+            nvl(d.dept_title,'인턴') 부서명,
+            nvl(l.local_name,'미지정') 근무지역명
+from employee E left join department D
+    on E.dept_code = D.dept_id
+    left join location L
+    on D. location_Id = L.local_code
+    where bonus is not null;
+ 
+  select *from employee;  --보너스,사원명 보너스 포인트
+select *from department;--부서명
+select * from location; -- 근무지역명
+--7. 부서코드가 D2인 직원들의 사원명, 직급명, 부서명, 근무지역명을 조회하시오.
+ 
+ select e.emp_name 사원명, 
+            j.job_name 직급명,
+            nvl(d.dept_title,'인턴') 부서명,
+            nvl(l.local_name,'미지정') 근무지역명
+from employee E left join department D
+    on E.dept_code = D.dept_id
+    left join location L
+    on D. location_Id = L.local_code
+    left join job J
+   on  E.job_code = j.job_code
+    where D.dept_Id = 'D2';
+ 
+  select *from employee;  --사원명 
+  select * from job; --직급명
+select *from department;--부서명
+select * from location; -- 근무지역명
+
+--8. 급여등급테이블의 등급별 최대급여(MAX_SAL)보다 많이 받는 
+--직원들의 사원명, 직급명, 급여, 연봉을 조회하시오.
+--(사원테이블과 급여등급테이블을 SAL_LEVEL컬럼기준으로 동등 조인할 것)
+select e.emp_name 사원명,
+            j.job_name 직급명,
+           to_char( e.salary, 'fmL9,999,999,999') 급여,
+         to_char((e.salary +(e.salary *nvl(bonus,0)))*12, 'fmL9,999,999,999') 연봉  
+from employee E  join job J
+   on  E.job_code = j.job_code
+    join sal_grade S
+   on E.sal_level = S.sal_level 
+  where  e.salary > S.max_sal;
+    
+  select *from employee;  --사원명 
+  select * from job; --직급명
+select * from sal_grade;--급여 등급
+
+--9. 한국(KO)과 일본(JP)에 근무하는 직원들의 
+--사원명, 부서명, 지역명, 국가명을 조회하시오.
+select e.emp_name 사원명,
+         nvl(d.dept_title, '인턴') 부서명,
+         l.local_name 지역명,
+         n.national_name 국가명
+from employee E left join department D
+    on E.dept_code = D.dept_id
+    left join location L
+    on D. location_Id = L.local_code
+    left join nation N
+    on L.national_code = N.national_code
+    where L.national_code in ('KO','JP');
+
+  select *from employee;  --사원명 
+select *from department;--부서명
+select * from location; -- 근무지역명
+select * from nation;--국가명 코드
+
+
+--10. 같은 부서에 근무하는 직원들의 사원명, 부서코드, 동료이름을 조회하시오.
+--self join 사용
+select   e1.emp_name 사원명,
+            d.dept_title 부서명,
+            e2.emp_name 동료이름
+from employee E1 join employee E2
+        on e1.dept_code = e2.dept_code
+        join department D
+          on E2.dept_code = D.dept_id
+          where e1.emp_name !=  e2.emp_name
+          order by 1;
+        
+ select *from employee;  --사원명 
+select *from department;--부서명
+
+--11. 보너스포인트가 없는 직원들 중에서 직급이 차장과 사원인 직원들의 사원명, 직급명, 급여를 조회하시오.
+select e.emp_name 사원명,
+            j.job_name 직급명,
+            e.salary 급여
+from employee E left join job J
+     on E.job_code = j.job_code
+     where e.bonus is null and j.job_name in ('차장','사원');
+
+select * from job; --직급명
+ select *from employee;  --사원명 
+ 
+ 
+--12. 재직중인 직원과 퇴사한 직원의 수를 조회하시오.
+    select count(decode(quit_yn,'N',1)) 재직,
+                count(decode(quit_yn,'Y',1))  퇴사
+  from employee;
+   
