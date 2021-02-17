@@ -1,0 +1,107 @@
+--==========================
+--관리자 계정
+--==========================
+--student 계정 생성 및 권한 부여
+create user student
+identified by student
+default tablespace users;
+
+grant connect, resource to student;
+
+--==========================
+--STUDENT 계정
+--==========================
+
+create table member(
+    member_id varchar2(20),
+    password varchar2(20) not null,
+    member_name varchar2(100) not null,
+    gender char(1),
+    age number,
+    email varchar2(200),
+    phone char(11) not null,
+    adress varchar2(1000),
+    hobby varchar2(100), --농구 ,음악, 영화
+    enroll_date date default sysdate,
+    
+    constraint pk_member_id primary key(member_id),
+    constraint ck_member_gender check(gender in('M','F'))
+);
+
+alter table member
+rename column adress to address;--컬럼명이 동일해야 하기 때문에 이름을 바꿔주었다.
+
+insert into member
+values (
+    'hoi', '1225','둘리','M',50,
+    'hoi@naver.com','01034568293',
+    '서울 수유리 쌍문동','도우너와 놀기,또치랑 놀기,공기놀이',default
+);
+
+insert into member
+values (
+    'gilldong', '1224','고길동','M',60,
+    'gilldong@naver.com','01068492049',
+    '서울 미아리 미아리동','장기, 노래,골프',default
+);
+
+insert into member
+values (
+    'kantaBBia', '0228','도우너','M',10,
+    'kantaBBia@naver.com','01019193029',
+    '서울 강남구 테헤란로','바이올린,둘리랑 놀기,음악감상',default
+);
+
+insert into member
+values (
+    'spangebob', '1022','스펀지밥','M',40,
+    'spangebob@gmail.com','01074442934',
+    '미국 바다 한가운데','해파리사냥, 게살버거만들기, 뚱이랑 놀기',default
+);
+
+insert into member
+values (
+    'ddaram', '0712','다람이','F',50,
+    'ddaram@gmail.com','01069302934',
+    '미국 택사스주','태권도,개발,기계만들기',default
+);
+
+
+--삭제 쿼리문
+delete from member;
+-- 업데이트 구문
+update studetn
+set  password = ,email =, phone =,adress =,  hobby =
+where emp_id = ;
+
+select * from member
+order by enroll_date;
+
+commit;
+desc member;
+
+--기존컬럼에서 del_date컬럼 추가
+create table member_del
+as 
+select member.*,sysdate del_date
+from member
+where 1=0;
+
+create or replace trigger trigger_member
+     before
+        delete on member
+        for each row
+begin
+    insert into member_del
+    (member_id,password,member_name,gender,age, email,phone,address,hobby,enroll_date,del_date)
+    values
+    (:old.member_id,:old.password,:old.member_name,:old.gender,:old.age, :old.email,:old.phone,
+    :old.address,:old.hobby,:old.enroll_date,sysdate);
+end;
+/
+select * from member_del
+order by del_date desc;
+
+select * from member;
+delete from member
+     where emp_id =;
