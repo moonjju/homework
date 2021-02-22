@@ -71,6 +71,7 @@
                         type="number" 
                         name="p_number" 
                         id="p_number"
+                        min="100"
                         required/>
                     <br>
              </li> 
@@ -80,7 +81,7 @@
                         type="range" 
                         name="p_grade" 
                         id="p_grade"
-                        min="100"
+                        
                         required/>
                     <br>
               </li> 
