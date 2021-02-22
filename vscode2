@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제2</title>
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>납품자 정보</legend>
+          <ol>
+              <li>
+                    <label for="n_name">납품자명(필수) : </label>
+                    <input 
+                    type="text" 
+                    name="n_name" 
+                    id="n_name" 
+                    required/>
+                    <br>
+              </li>   
+              <li> 
+                    <label for="email">email(필수) : </label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email"
+                        placeholder="answer@naver.com" 
+                        required/>
+                    <br>
+              </li>
+              <li>
+                    <label for="url">홈페이지 : </label>
+                        <input 
+                        type="url" 
+                        name="url" 
+                        id="url"
+                        value="http://"/>
+                    <br>
+              </li>  
+              <li>  
+                    <label for="Area">지역 : </label>
+                    <select name="Area" id="Area">
+                            <option value="서울">서울</option>
+                            <option value="경주">경주</option>
+                            <option value="부산">부산</option>
+                            <option value="대구">대구</option>
+                            <option value="대전">대전</option>
+                            <option value="강원도">강원도</option>
+                    </select>
+                    <br>
+               </li>  
+          </ol>
+        </fieldset>
+        <fieldset>
+            <legend>납품정보</legend>
+           <ul>
+               <li>
+                    <label for="p_name">상품명(필수) : </label>
+                        <input 
+                        type="text" 
+                        name="p_name" 
+                        id="p_name"
+                        required/>
+                    <br>
+              </li> 
+              <li>
+                    <label for="p_number">납품수량(필수) : </label>
+                        <input 
+                        type="number" 
+                        name="p_number" 
+                        id="p_number"
+                        required/>
+                    <br>
+             </li> 
+              <li>
+                    <label for="p_grade">납품등급(필수) : </label>
+                        <input 
+                        type="range" 
+                        name="p_grade" 
+                        id="p_grade"
+                        min="100"
+                        required/>
+                    <br>
+              </li> 
+              <li> 
+                    <label for="other">기타사항 : </label>
+                    <textarea 
+                    name="other" 
+                    id="other" 
+                    />
+                    </textarea>
+                    <br> 
+             </li> 
+          </ul>
+        </fieldset>
+        <button type="submit">send message</button>
+
+
+    </form>
+
+
+</body>
+</html>
