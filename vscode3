@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="name">고객명 : </label>
+        <input type="text" name="name" id="name">
+        <br>
+        <br>
+        <label for="num">전화번호(필수) : </label>
+        <input type="tel" name="num" id="num" required>
+        <br>
+        <br>
+        <label for="email">E-mail : </label>
+        <input type="email" name="email" id="email">
+        <br>
+        <br>
+        <label for="menu">피자선택(필수) : </label>
+        <select name="menu" id="menu" required>
+              <option value="리치골드" selected>피자를 선택하세요</option>
+                <option value="리치골드">리치골드</option>
+                <option value="치즈바이트">치즈바이트</option>
+                <option value="페페로니">페페로니</option>
+                <option value="콤비네이션">콤비네이션</option>   
+        </select>
+    </form>
+    <br>
+    <form action="">
+        <fieldset>
+            <legend>피자 사이즈(필수</legend>
+            <div>
+                <input type="radio" name="size" id="Small" value="s">
+                <label for="Small">Small</label>
+            </div>
+            <br>
+            <div>
+                <input type="radio" name="size" id="Medium" value="m">
+                <label for="Medium">Medium</label>
+            </div>
+            <br>
+            <div> 
+                <input type="radio" name="size" id="Large" value="L">
+                <label for="Large">Large</label>
+            </div>
+            <br>
+        </fieldset>
+    </form>
+    <br>
+    <br>
+    <form action="">
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <div>
+                <input type="checkbox" name="topping" id="topping-bacon" value="bacon">
+                <label for="topping-bacon">베이컨</label>
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" name="topping" id="topping-cheese" value="cheese">
+                <label for="topping-cheese">치즈</label>
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" name="topping" id="topping-onion" value="onion">
+                <label for="topping-onion">양파</label>
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" name="topping" id="topping-mushroom" value="mushroom">
+                <label for="topping-mushroom">버섯</label>
+            </div>
+        </fieldset>
+    </form>
+    <form action="">
+        <br>
+            <label for="delivery">희망 배송 시간</label>
+            <input type="time" name="delivery" id="delivery" >
+    </form>
+    <br>
+    <form action="">
+        <label for="msg">배송시 요청사항 : </label>
+        <textarea name="msg" id="msg" cols="20" rows="5"></textarea>
+    </form>
+    <br>
+    
+    <input type="submit" value="주문하기">
+    <hr>
+</body>
+</html>
