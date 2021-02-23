@@ -22,7 +22,7 @@
         <br>
         <label for="menu">피자선택(필수) : </label>
         <select name="menu" id="menu" required>
-              <option value="리치골드" selected>피자를 선택하세요</option>
+              <option value="피자를선택하세요" selected disabled hidden>피자를 선택하세요</option>
                 <option value="리치골드">리치골드</option>
                 <option value="치즈바이트">치즈바이트</option>
                 <option value="페페로니">페페로니</option>
