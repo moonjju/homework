@@ -28,9 +28,9 @@
                 <option value="페페로니">페페로니</option>
                 <option value="콤비네이션">콤비네이션</option>   
         </select>
-    </form>
+    
     <br>
-    <form action="">
+    
         <fieldset>
             <legend>피자 사이즈(필수</legend>
             <div>
@@ -49,10 +49,10 @@
             </div>
             <br>
         </fieldset>
-    </form>
+   
     <br>
     <br>
-    <form action="">
+   
         <fieldset>
             <legend>토핑 선택</legend>
             <div>
@@ -75,20 +75,22 @@
                 <label for="topping-mushroom">버섯</label>
             </div>
         </fieldset>
-    </form>
-    <form action="">
+    
+   
         <br>
             <label for="delivery">희망 배송 시간</label>
             <input type="time" name="delivery" id="delivery" >
-    </form>
+    
     <br>
-    <form action="">
+    
         <label for="msg">배송시 요청사항 : </label>
         <textarea name="msg" id="msg" cols="20" rows="5"></textarea>
+         <br>
+         <br>
+        <input type="submit" value="주문하기">
     </form>
     <br>
     
-    <input type="submit" value="주문하기">
     <hr>
 </body>
 </html>
