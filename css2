@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리 만들기</title>
+    <style>
+        div#gallery {
+            width: 500px;
+            height: 250px;
+            margin: 0 auto;
+            background-color: rgb(24, 23, 23);
+            list-style-type:none;
+        }
+        ul{
+            padding: 20px 40px;
+            margin: 20px;
+        }
+        li{
+            list-style-type:none; /*블릿 없애기*/
+            display: inline;
+            margin: 30px auto;
+            
+        }
+        .smll{
+            position: relative;
+        }
+        
+        .pic {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        margin: -10px 100px; 
+    }
+        
+    .small:hover + .pic {
+        border: 1px solid black;
+        display: block;
+        margin: 0 auto;
+        width: 240px;
+        height: 180px;
+        z-index: 10;
+
+    }
+    
+    </style>
+</head>
+<body>
+    <h2>사진 갤러리 만들기</h2>
+    <hr/>
+    <div id="gallery">
+        <ul>
+            <li> 
+                <img src="css/이미지배포/image/flower1.PNG" class="small" 
+                width="120" height="90"> 
+                <img src="css/이미지배포//image/flower1.PNG" class="pic"> 
+            </li>
+            <li>
+                <img src="css/이미지배포/image/flower2.PNG" class="small" width="120" height="90"> 
+                <img src="css/이미지배포/image/flower2.PNG" class="pic"> 
+            </li>
+            <li>
+                <img src="css/이미지배포/image/flower3.PNG" class="small" width="120" height="90"> 
+                <img src="css/이미지배포/image/flower3.PNG" class="pic"> 
+            </li>
+            <li>
+                <img src="css/이미지배포/image/flower4.PNG" class="small" width="120" height="90"> 
+                <img src="css/이미지배포/image/flower4.PNG" class="pic"> 
+            </li>
+            <li>
+                <img src="css/이미지배포/image/flower5.PNG" class="small" width="120" height="90">
+                <img src="css/이미지배포/image/flower5.PNG" class="pic"> 
+            </li>
+            <li>
+                <img src="CSS/이미지배포/image/forest1.PNG" class="small" width="120" height="90">
+                <img src="CSS/이미지배포/image/forest1.PNG" class="pic"> 
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
